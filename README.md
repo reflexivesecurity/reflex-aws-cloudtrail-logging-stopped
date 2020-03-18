@@ -1,12 +1,12 @@
 # reflex-aws-cloudtrail-logging-stopped
-TODO: Write a brief description of your rule and what it does.
+A reflex rule to detect when CloudTrail logging has been stopped.
 
 ## Usage
 To use this rule either add it to your `reflex.yaml` configuration file:  
 ```
 rules:
   - reflex-aws-cloudtrail-logging-stopped:
-      email: "example@example.com"
+    version: latest
 ```
 
 or add it directly to your Terraform:  
@@ -15,7 +15,6 @@ or add it directly to your Terraform:
 
 module "reflex-aws-cloudtrail-logging-stopped" {
   source           = "github.com/cloudmitigator/reflex-aws-cloudtrail-logging-stopped"
-  email            = "example@example.com"
 }
 
 ...

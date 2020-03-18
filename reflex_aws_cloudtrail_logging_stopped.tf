@@ -1,13 +1,28 @@
 module "reflex_aws_cloudtrail_logging_stopped" {
-  source           = "git::https://github.com/cloudmitigator/reflex-engine.git//modules/cwe_lambda"
+  source           = "git::https://github.com/cloudmitigator/reflex-engine.git//modules/cwe_lambda?ref=v0.5.4"
   rule_name        = "CloudtrailLoggingStopped"
-  rule_description = "TODO: Provide rule description"
+  rule_description = "Detects when a CloudTrail Trail has logging turned off."
 
   event_pattern = <<PATTERN
-# TODO: Provide event pattern
+{
+  "source": [
+    "aws.cloudtrail"
+  ],
+  "detail-type": [
+    "AWS API Call via CloudTrail"
+  ],
+  "detail": {
+    "eventSource": [
+      "cloudtrail.amazonaws.com"
+    ],
+    "eventName": [
+      "StopLogging"
+    ]
+  }
+}
 PATTERN
 
-  function_name   = "CloudtrailLoggingStopped"
+  function_name   = "CloudTrailLoggingStopped"
   source_code_dir = "${path.module}/source"
   handler         = "reflex_aws_cloudtrail_logging_stopped.lambda_handler"
   lambda_runtime  = "python3.7"
@@ -15,9 +30,6 @@ PATTERN
     SNS_TOPIC = var.sns_topic_arn,
     
   }
-  custom_lambda_policy = <<EOF
-# TODO: Provide required lambda permissions policy
-EOF
 
 
 
