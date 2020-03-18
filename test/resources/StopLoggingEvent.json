@@ -1,0 +1,44 @@
+{
+    "version": "0",
+    "id": "6ac2f08a-c9fe-343l-9d7b-4f0a5b34444",
+    "detail-type": "AWS API Call via CloudTrail",
+    "source": "aws.cloudtrail",
+    "account": "000000000000",
+    "time": "2020-03-18T02:53:09Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+        "eventVersion": "1.05",
+        "userIdentity": {
+            "type": "IAMUser",
+            "principalId": "AIDASGFFFFFFFFFFFF",
+            "arn": "arn:aws:iam::000000000000:user/example.user",
+            "accountId": "000000000000",
+            "accessKeyId": "AIDASGFFFFFFFFFFFF",
+            "userName": "example.user",
+            "sessionContext": {
+                "sessionIssuer": {},
+                "webIdFederationData": {},
+                "attributes": {
+                    "mfaAuthenticated": "true",
+                    "creationDate": "2020-03-18T02:47:57Z"
+                }
+            },
+            "invokedBy": "signin.amazonaws.com"
+        },
+        "eventTime": "2020-03-18T02:53:09Z",
+        "eventSource": "cloudtrail.amazonaws.com",
+        "eventName": "StopLogging",
+        "awsRegion": "us-east-1",
+        "sourceIPAddress": "127.0.0.1",
+        "userAgent": "signin.amazonaws.com",
+        "requestParameters": {
+            "name": "arn:aws:cloudtrail:us-east-1:000000000000:trail/test-trail"
+        },
+        "responseElements": null,
+        "requestID": "f84444a-84b7-eb0",
+        "eventID": "c58dkfjdkf-333-414274",
+        "readOnly": false,
+        "eventType": "AwsApiCall"
+    }
+}
