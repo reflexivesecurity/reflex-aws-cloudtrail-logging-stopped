@@ -10,6 +10,8 @@ from reflex_core import AWSRule
 class CloudTrailLoggingStopped(AWSRule):
     """ Rule to detect CloudTrail logging being stopped.  """
 
+    client = boto3.client("cloudtrail")
+
     def __init__(self, event):
         super().__init__(event)
 
@@ -25,9 +27,17 @@ class CloudTrailLoggingStopped(AWSRule):
         """
         return False
 
+    def remediate(self):
+        """ Fix the non-compliant resource so it conforms to the rule """
+        self.client.start_logging(Name=self.trail_name)
+
     def get_remediation_message(self):
         """ Returns a message about the remediation action that occurred """
-        return f"The trail {self.trail_name} has had logging stopped."
+        message = f"The trail {self.trail_name} has had logging stopped."
+        if self.should_remediate():
+            message += "Logging has been restarted."
+
+        return message
 
 
 def lambda_handler(event, _):

@@ -27,7 +27,22 @@ module "cloudtrail-logging-stopped" {
 Note: The `sns_topic_arn` and `reflex_kms_key_id` example values shown here assume you generated resources with `reflex build`. If you are using the Terraform on its own you need to provide your own valid values.
 
 ## Configuration
-This rule has no configuration options.
+This rule has the following configuration options:
+
+<dl>
+  <dt>mode</dt>
+  <dd>
+  <p>Sets the rule to operate in <code>detect</code> or <code>remediate</code> mode.</p>
+
+  <em>Required</em>: No  
+
+  <em>Type</em>: string
+
+  <em>Possible values</em>: `detect` | `remediate`  
+
+  <em>Default</em>: `detect`
+  </dd>
+</dl>
 
 ## Contributing
 If you are interested in contributing, please review [our contribution guide](https://docs.cloudmitigator.com/about/contributing.html).
