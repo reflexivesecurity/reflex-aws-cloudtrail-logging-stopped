@@ -12,6 +12,8 @@ To use this rule either add it to your `reflex.yaml` configuration file:
 rules:
   aws:
     - reflex-aws-cloudtrail-logging-stopped:
+        configuration:
+          mode: remediate
         version: latest
 ```
 
@@ -21,6 +23,7 @@ module "cloudtrail-logging-stopped" {
   source            = "git::https://github.com/cloudmitigator/reflex-aws-cloudtrail-logging-stopped.git?ref=latest"
   sns_topic_arn     = module.central-sns-topic.arn
   reflex_kms_key_id = module.reflex-kms-key.key_id
+  mode              = "remediate"
 }
 ```
 
