@@ -1,10 +1,10 @@
 output "id" {
   description = "Event Rule ID"
-  value       = cwe.id
+  value       = module.cwe.id
 }
 
 output "arn" {
   description = "Event Rule Arn"
-  value       = cwe.arn
+  value       = module.cwe.arn
 }
 
