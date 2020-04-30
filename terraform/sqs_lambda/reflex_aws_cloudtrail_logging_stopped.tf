@@ -1,10 +1,12 @@
 module "reflex_aws_cloudtrail_logging_stopped_sqs_lambda" {
-  source           = "git::https://github.com/cloudmitigator/reflex-engine.git//modules/sqs_lambda?ref=region-refactor"
+  source = "git::https://github.com/cloudmitigator/reflex-engine.git//modules/sqs_lambda?ref=region-refactor"
 
-  function_name   = "CloudTrailLoggingStopped"
-  source_code_dir = "${path.module}/../../source"
-  handler         = "reflex_aws_cloudtrail_logging_stopped.lambda_handler"
-  lambda_runtime  = "python3.7"
+  cloudwatch_event_rule_id  = var.cloudwatch_event_rule_id
+  cloudwatch_event_rule_arn = var.cloudwatch_event_rule_arn
+  function_name             = "CloudTrailLoggingStopped"
+  source_code_dir           = "${path.module}/../../source"
+  handler                   = "reflex_aws_cloudtrail_logging_stopped.lambda_handler"
+  lambda_runtime            = "python3.7"
   environment_variable_map = {
     SNS_TOPIC = var.sns_topic_arn,
     MODE      = var.mode
