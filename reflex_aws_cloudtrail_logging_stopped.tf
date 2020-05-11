@@ -1,5 +1,5 @@
 module "reflex_aws_cloudtrail_logging_stopped" {
-  source           = "git::https://github.com/cloudmitigator/reflex-engine.git//modules/cwe_lambda?ref=v0.5.7"
+  source           = "git::https://github.com/cloudmitigator/reflex-engine.git//modules/cwe_lambda?ref=v0.6.0"
   rule_name        = "CloudtrailLoggingStopped"
   rule_description = "Detects when a CloudTrail Trail has logging turned off."
 
