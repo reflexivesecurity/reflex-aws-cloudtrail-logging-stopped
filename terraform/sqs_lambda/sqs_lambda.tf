@@ -1,27 +1,7 @@
-module "reflex_aws_cloudtrail_logging_stopped" {
-  source           = "git::https://github.com/cloudmitigator/reflex-engine.git//modules/cwe_lambda?ref=v0.5.7"
-  rule_name        = "CloudtrailLoggingStopped"
-  rule_description = "Detects when a CloudTrail Trail has logging turned off."
-
-  event_pattern = <<PATTERN
-{
-  "source": [
-    "aws.cloudtrail"
-  ],
-  "detail-type": [
-    "AWS API Call via CloudTrail"
-  ],
-  "detail": {
-    "eventSource": [
-      "cloudtrail.amazonaws.com"
-    ],
-    "eventName": [
-      "StopLogging"
-    ]
-  }
-}
-PATTERN
-
+module "sqs_lambda" {
+  source = "git::https://github.com/cloudmitigator/reflex-engine.git//modules/sqs_lambda?ref=v0.6.0"
+  cloudwatch_event_rule_id  = var.cloudwatch_event_rule_id
+  cloudwatch_event_rule_arn = var.cloudwatch_event_rule_arn
   function_name   = "CloudTrailLoggingStopped"
   source_code_dir = "${path.module}/source"
   handler         = "reflex_aws_cloudtrail_logging_stopped.lambda_handler"
