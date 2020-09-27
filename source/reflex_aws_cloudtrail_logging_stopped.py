@@ -4,7 +4,7 @@ import json
 import os
 
 import boto3
-from reflex_core import AWSRule
+from reflex_core import AWSRule, subscription_confirmation
 
 
 class CloudTrailLoggingStopped(AWSRule):
@@ -42,5 +42,10 @@ class CloudTrailLoggingStopped(AWSRule):
 
 def lambda_handler(event, _):
     """ Handles the incoming event """
-    rule = CloudTrailLoggingStopped(json.loads(event["Records"][0]["body"]))
+    print(event)
+    event_payload = json.loads(event["Records"][0]["body"])
+    if subscription_confirmation.is_subscription_confirmation(event_payload):
+        subscription_confirmation.confirm_subscription(event_payload)
+        return
+    rule = CloudTrailLoggingStopped(event_payload)
     rule.run_compliance_rule()
